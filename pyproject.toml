@@ -1,0 +1,37 @@
+[project]
+name = "prueba-tecnica-ds"
+version = "0.1.0"
+description = "Pronóstico de demanda por tienda × categoría para reposición inteligente (retail México)"
+readme = "README.md"
+requires-python = ">=3.11"
+
+# Dependencias de ejecución: lo que necesita el paquete src/ y el modelado.
+# Stack 100% wheels puros, sin dependencias de sistema: el modelo de boosting
+# es HistGradientBoostingRegressor de scikit-learn (nativo, maneja categóricas
+# y datos faltantes), evitando el libomp de sistema que exige lightgbm en macOS.
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "scikit-learn>=1.4",
+]
+
+[dependency-groups]
+# Herramientas de notebook y análisis interactivo. uv sincroniza el grupo
+# `dev` por defecto; en producción/CI se puede omitir con --no-dev.
+dev = [
+    "jupyterlab>=4.2",
+    "ipykernel>=6.29",
+    "nbconvert>=7.16",
+    "nbformat>=5.10",
+]
+
+# src/ es un paquete importable (from src import config, data, ...).
+# Instalarlo (editable) hace que los imports funcionen desde cualquier
+# directorio, sin depender de sys.path ni del working directory.
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
