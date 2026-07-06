@@ -11,6 +11,12 @@ from .. import config
 
 def setup_logging() -> None:
     """Configura el logging estándar de los pipelines (nivel INFO)."""
+    # La consola de Windows usa cp1252 por defecto y no puede codificar
+    # caracteres como ✓ o Δ que imprimen los pipelines; UTF-8 con
+    # ``errors="replace"`` evita que un print cosmético tumbe la corrida.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",

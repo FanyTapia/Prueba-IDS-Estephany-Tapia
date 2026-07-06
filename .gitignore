@@ -21,3 +21,8 @@ notebooks/.ipynb_checkpoints/
 # Datos pesados o generados (los CSV de origen sí se versionan; salidas no)
 outputs/
 *.log
+
+# Tracking de MLflow: es local a cada máquina (guarda rutas absolutas del
+# equipo donde se ejecuta); cada quien lo regenera con `uv run retail-flow`.
+mlflow.db
+mlruns/

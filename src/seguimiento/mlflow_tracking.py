@@ -27,6 +27,7 @@ from .. import config
 logger = logging.getLogger(__name__)
 
 TRACKING_URI = f"sqlite:///{config.PROJECT_ROOT / 'mlflow.db'}"
+ARTIFACT_LOCATION = (config.PROJECT_ROOT / "mlruns").as_uri()
 REGISTRY_NAME = "retail-demand-forecaster"
 
 
@@ -75,6 +76,11 @@ def log_training_run(model, panel, feature_cols: list, params: dict,
         El ``run_id`` de MLflow de la corrida creada.
     """
     mlflow.set_tracking_uri(TRACKING_URI)
+    # Al crear el experimento se fija la ubicación de artefactos en la raíz
+    # del proyecto; sin esto MLflow usaría el cwd y guardaría en la base una
+    # ruta absoluta que se rompe al mover el repo de máquina.
+    if mlflow.get_experiment_by_name(experiment) is None:
+        mlflow.create_experiment(experiment, artifact_location=ARTIFACT_LOCATION)
     mlflow.set_experiment(experiment)
 
     with mlflow.start_run(run_name=run_name) as run:
