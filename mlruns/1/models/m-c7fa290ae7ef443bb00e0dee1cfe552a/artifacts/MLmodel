@@ -1,0 +1,54 @@
+artifact_path: /Users/owner/Downloads/Prueba_Tecnica_DS/mlruns/1/models/m-c7fa290ae7ef443bb00e0dee1cfe552a/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.14.0
+model_id: m-c7fa290ae7ef443bb00e0dee1cfe552a
+model_size_bytes: 2201866
+model_uuid: m-c7fa290ae7ef443bb00e0dee1cfe552a
+prompts: null
+run_id: 5d18a7d63aea4034998856b96129838a
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "units_sold_lag14", "required": false}, {"type":
+    "double", "name": "units_sold_lag21", "required": false}, {"type": "double", "name":
+    "units_sold_lag28", "required": false}, {"type": "double", "name": "lag_dow_mean",
+    "required": true}, {"type": "double", "name": "units_sold_ma7", "required": true},
+    {"type": "double", "name": "units_sold_ma28", "required": true}, {"type": "double",
+    "name": "units_sold_std7", "required": true}, {"type": "long", "name": "t_index",
+    "required": true}, {"type": "long", "name": "day_of_week", "required": true},
+    {"type": "long", "name": "week_of_year", "required": true}, {"type": "long", "name":
+    "month", "required": true}, {"type": "long", "name": "quarter", "required": true},
+    {"type": "boolean", "name": "is_holiday", "required": true}, {"type": "boolean",
+    "name": "is_payday", "required": true}, {"type": "boolean", "name": "is_weekend",
+    "required": true}, {"type": "boolean", "name": "is_navidad_season", "required":
+    true}, {"type": "boolean", "name": "is_buen_fin", "required": true}, {"type":
+    "boolean", "name": "is_semana_santa", "required": true}, {"type": "long", "name":
+    "size_sqm", "required": true}, {"type": "long", "name": "num_checkouts", "required":
+    true}, {"type": "long", "name": "opening_year", "required": true}, {"type": "boolean",
+    "name": "has_pharmacy", "required": true}, {"type": "boolean", "name": "has_fuel_station",
+    "required": true}, {"type": "string", "name": "store_id", "required": true}, {"type":
+    "string", "name": "category", "required": true}, {"type": "string", "name": "store_format",
+    "required": true}, {"type": "string", "name": "region", "required": true}, {"type":
+    "string", "name": "socioeconomic_level", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-07-06 15:27:51.540433'

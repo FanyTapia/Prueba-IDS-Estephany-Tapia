@@ -8,6 +8,8 @@ OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 TRANSACTIONS_CSV = DATA_DIR / "transactions.csv"
 STORES_CSV = DATA_DIR / "stores.csv"
 CALENDAR_CSV = DATA_DIR / "calendar.csv"
+EVENT_PRIORS_CSV = DATA_DIR / "external" / "event_priors.csv"
+EVENT_REFERENCE_CSV = DATA_DIR / "external" / "event_reference.csv"
 
 # Orden canónico (del diccionario de datos). Se usa también para asignar
 # colores de forma fija: una categoría siempre recibe el mismo color.

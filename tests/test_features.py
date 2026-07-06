@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 
 from src import config
-from src.features import add_demand_features, build_features
+from src.preprocesamiento.features import add_demand_features, build_features
 
 
 def test_no_leakage_perturbando_el_futuro_cercano(toy_data):
@@ -28,7 +28,7 @@ def test_no_leakage_perturbando_el_futuro_cercano(toy_data):
 
 def test_rezago_menor_al_horizonte_es_rechazado(toy_data):
     tx, stores, cal = toy_data
-    from src.features import complete_grid
+    from src.preprocesamiento.features import complete_grid
     panel = complete_grid(tx, stores, cal)
     with pytest.raises(ValueError, match="fuga"):
         add_demand_features(panel, target="units_sold", horizon=14,

@@ -1,0 +1,3 @@
+comparacion,delta_wape,delta_lo,delta_hi,significativo,n_dias
+gradient_boosting_prior − sistema_actual,-0.04952910291688892,-0.0768566309211365,-0.024894210365833506,True,14
+gradient_boosting_prior − naive_estacional,-0.028377656880544583,-0.03470828327038872,-0.02192929575009386,True,14

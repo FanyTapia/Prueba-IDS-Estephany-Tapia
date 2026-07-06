@@ -1,0 +1,11 @@
+evento,nombre,factor_externo,fuente
+semana_santa,Semana Santa (Jueves y Viernes Santo),0.90,"EMEC abril: estacionalidad negativa en comercio urbano por vacaciones (el gasto se desplaza a turismo/viajes)"
+dia_constitucion,Día de la Constitución (5 feb),1.10,"Fin de semana largo ('puente'): supuesto de consumo recreativo al alza, típico en reportes de festivos"
+benito_juarez,Natalicio de Benito Juárez (21 mar),1.10,"Fin de semana largo ('puente'): mismo supuesto que otros puentes oficiales"
+dia_trabajo,Día del Trabajo (1 may),1.00,"Festivo oficial sin patrón de regalo asociado: supuesto neutro"
+independencia,Día de la Independencia (16 sep),1.30,"CANIRAC/ANTAD sep: fiestas patrias elevan alimentos, bebidas y desechables"
+dia_muertos,Día de Muertos (2 nov),1.50,"ANTAD nov: flores, veladoras y alimentos de temporada"
+virgen_guadalupe,Día de la Virgen de Guadalupe (12 dic),1.40,"Consumo asociado a peregrinaciones y festividad religiosa"
+quincena,Quincena / día de pago,1.30,"Patrón de nómina quincenal ampliamente documentado en consumo minorista MX"
+dia_madres,Día de las Madres (10 may),2.50,"CONCANACO/ANTAD mayo: reportado consistentemente como uno de los 3 días de mayor venta retail del año"
+dia_nino,Día del Niño (30 abr),1.60,"ANTAD abril: pico en juguetes, dulces y regalos"

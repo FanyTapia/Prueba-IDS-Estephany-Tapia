@@ -2,6 +2,8 @@
 
 Paleta categórica con orden fijo (validada para daltonismo): cada entidad
 conserva siempre el mismo color en todos los gráficos del proyecto.
+Se usan gráficos estáticos (matplotlib) para que el entregable sea visible
+directamente en GitHub, que no ejecuta JavaScript en la vista de notebooks.
 """
 import matplotlib as mpl
 from matplotlib.colors import LinearSegmentedColormap
@@ -27,8 +29,10 @@ ACCENT = _SLOTS[0]          # serie única / destacado
 ACCENT_ALT = _SLOTS[5]      # contraste puntual (rojo)
 
 # Rampa secuencial de un solo tono (azul 100 -> 700) para magnitudes
-_BLUE_RAMP = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
-SEQUENTIAL_CMAP = LinearSegmentedColormap.from_list("seq_blue", _BLUE_RAMP)
+SEQUENTIAL_STEPS = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
+SEQUENTIAL_CMAP = LinearSegmentedColormap.from_list("seq_blue", SEQUENTIAL_STEPS)
+# Rampa ordinal corta (C -> A/B) que aún contrasta con la superficie
+ORDINAL_STEPS = ["#86b6ef", "#3987e5", "#1c5cab", "#0d366b"]
 
 
 def apply_style():
@@ -61,3 +65,34 @@ def apply_style():
         "font.family": "sans-serif",
         "text.color": INK,
     })
+
+
+def apply_plotly_style():
+    """Registra el tema 'retail' en Plotly y activa el renderer combinado.
+
+    El renderer `plotly_mimetype+png` emite en cada figura tanto la versión
+    interactiva (para inspección local: hover, zoom) como un PNG estático
+    (para que GitHub, que no ejecuta JavaScript, muestre el gráfico). Import
+    diferido de Plotly para no cargarlo en los notebooks que solo usan
+    matplotlib.
+    """
+    import plotly.graph_objects as go
+    import plotly.io as pio
+
+    eje = dict(gridcolor=GRID, gridwidth=1, linecolor=BASELINE, zeroline=False,
+               ticks="outside", tickcolor=BASELINE,
+               tickfont=dict(color=INK_MUTED, size=11),
+               title=dict(font=dict(color=INK_SECONDARY, size=12)))
+    tpl = go.layout.Template()
+    tpl.layout = dict(
+        paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
+        font=dict(family='system-ui, -apple-system, "Segoe UI", sans-serif',
+                  color=INK, size=12),
+        title=dict(font=dict(size=15, color=INK), x=0.01, xanchor="left"),
+        colorway=_SLOTS, xaxis=eje, yaxis=eje,
+        legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(size=11)),
+        margin=dict(l=60, r=30, t=55, b=45),
+    )
+    pio.templates["retail"] = tpl
+    pio.templates.default = "retail"
+    pio.renderers.default = "plotly_mimetype+png"

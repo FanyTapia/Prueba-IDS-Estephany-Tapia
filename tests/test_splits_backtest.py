@@ -2,9 +2,9 @@ import pandas as pd
 import pytest
 
 from src import config
-from src.backtest import run_backtest, summarize
-from src.features import build_features
-from src.splits import make_folds
+from src.evaluacion.backtest import run_backtest, summarize
+from src.evaluacion.splits import make_folds
+from src.preprocesamiento.features import build_features
 
 
 def test_folds_no_traslapan_train_y_test():
@@ -31,7 +31,8 @@ def test_backtest_end_to_end_en_dataset_sintetico(toy_data):
     folds = make_folds(["2023-03-17"], horizon=14, date_max=panel["date"].max())
 
     preds = run_backtest(panel, cols, folds, params={**config.MODEL_PARAMS, "max_iter": 50})
-    assert set(preds["modelo"]) == {"gradient_boosting", "naive_estacional", "sistema_actual"}
+    assert set(preds["modelo"]) == {"gradient_boosting", "gradient_boosting_prior",
+                                    "naive_estacional", "sistema_actual"}
     assert preds["y_pred"].notna().all()
     assert (preds["y_pred"] >= 0).all()
 

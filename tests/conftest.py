@@ -39,7 +39,8 @@ def toy_data():
             rows.append(pd.DataFrame({
                 "date": dates, "store_id": sid, "category": cat,
                 "units_sold": units.round(1),
-                "replenishment_signal": pd.Series(units).shift(2).rolling(7, min_periods=1).mean().values,
+                "replenishment_signal":
+                    pd.Series(units).shift(2).rolling(7, min_periods=1).mean().values,
             }))
     tx = pd.concat(rows, ignore_index=True)
     return tx, stores, cal

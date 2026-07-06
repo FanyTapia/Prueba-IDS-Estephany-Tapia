@@ -7,15 +7,21 @@ import argparse
 import logging
 
 from .. import config
-from ..artifacts import create_run_dir, run_metadata, save_json, setup_logging
-from ..data import load_calendar, load_stores, load_transactions
-from ..features import build_features
-from ..models import DemandForecaster
+from ..entrenamiento.models import DemandForecaster
+from ..postproceso.priors import PRIOR_COL
+from ..preprocesamiento.data import load_calendar, load_stores, load_transactions
+from ..preprocesamiento.features import build_features
+from ..seguimiento.artifacts import create_run_dir, run_metadata, save_json, setup_logging
 
 logger = logging.getLogger("pipelines.train")
 
 
 def main(argv=None) -> None:
+    """Punto de entrada del entrenamiento del modelo final.
+
+    Args:
+        argv: Argumentos de línea de comandos (None = ``sys.argv``).
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--horizon", type=int, default=config.HORIZON)
     args = parser.parse_args(argv)
@@ -27,7 +33,7 @@ def main(argv=None) -> None:
 
     fit_mask = panel[config.TARGET].notna()
     logger.info("Entrenando con %s filas (hasta %s)…", fit_mask.sum(), panel["date"].max().date())
-    model = DemandForecaster(feature_cols, args.horizon)
+    model = DemandForecaster(feature_cols, args.horizon, prior_col=PRIOR_COL)
     model.fit(panel.loc[fit_mask], panel.loc[fit_mask, config.TARGET])
 
     run_dir = create_run_dir("models")
